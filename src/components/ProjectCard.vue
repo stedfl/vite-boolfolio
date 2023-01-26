@@ -39,8 +39,8 @@ export default {
 <style lang="scss" scoped>
 .card {
   margin-bottom: 2rem;
-
   color: #405189;
+  width: calc(100% / 2);
 
   .inner-card {
     display: inline-block;
