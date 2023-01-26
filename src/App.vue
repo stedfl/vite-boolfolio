@@ -1,8 +1,12 @@
 <script>
 import axios from "axios";
+import ProjectCard from "./components/ProjectCard.vue";
 
 export default {
   name: "App",
+  components: {
+    ProjectCard,
+  },
   data() {
     return {
       apiUrl: "http://127.0.0.1:8001/api/",
@@ -24,10 +28,11 @@ export default {
 
 <template>
   <div class="container">
-    <h1>Lista Progetti</h1>
-    <div v-for="project in projects" :key="project.id">
-      <h1>{{ project.name }}</h1>
-      <p v-html="project.summary"></p>
+    <div class="main-wrap">
+      <h1 class="title">LISTA PROGETTI</h1>
+      <div class="cards-container">
+          <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
+      </div>      
     </div>
   </div>
 </template>
