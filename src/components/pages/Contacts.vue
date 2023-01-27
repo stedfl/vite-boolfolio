@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  CONTACTS
+  <div class="container">CONTATTI</div>
 </template>
 <style>
 

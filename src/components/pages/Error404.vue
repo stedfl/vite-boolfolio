@@ -1,12 +1,9 @@
 <script>
 export default {
-  name: 'Error404'
-
-}
+  name: "Error404",
+};
 </script>
 <template>
-  ERRORE 404
+  <div class="container">ERRORE 404</div>
 </template>
-<style>
-
-</style>
+<style></style>

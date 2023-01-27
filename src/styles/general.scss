@@ -7,10 +7,21 @@
 }
 
 body {
-  background-color: #405189;
-  color: white;
+  background-color: #cde7fc;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+}
+
+main {
+  height: calc(100vh - 80px);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {
@@ -18,5 +29,4 @@ body {
   overflow: auto;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 2rem 0;
 }
