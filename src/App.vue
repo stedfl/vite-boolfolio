@@ -9,7 +9,7 @@ export default {
   },
   data() {
     return {
-      apiFirstUrl: "http://127.0.0.1:8001/api/projects",
+      apiFirstUrl: "http://127.0.0.1:8000/api/projects",
       lastPage: null,
       projects: [],
       linkPages: [],
@@ -42,6 +42,7 @@ export default {
   <div class="container">
     <div class="main-wrap">
       <h1 class="title">LISTA PROGETTI</h1>
+      <router-view></router-view>
       <div class="cards-container">
           <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
       </div>
