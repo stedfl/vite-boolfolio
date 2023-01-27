@@ -55,6 +55,7 @@ ul {
   justify-content: space-between;
   align-items: center;
 }
+
 .link,
 .icon {
   color: #405189;
@@ -64,8 +65,9 @@ ul {
 .link {
   padding: 31px 20px;
   &.active {
-    background-color: #405189;
+    background-color: #537bff;
     color: white;
+    border-radius: 10px;
   }
 }
 

@@ -14,7 +14,7 @@ export default {
         <router-link :to="{name: 'postdetail', params: {slug: project.slug}}">
           <h2>{{ project.name }}</h2>
         </router-link>
-        <span>{{ project.type.name }}</span>
+        <span v-if="project.type">{{ project.type.name }}</span>
       </div>
       <p v-html="project.summary"></p>
       <div v-if="project.technologies.length" class="tech">
@@ -38,7 +38,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .card {
   margin-bottom: 2rem;
   color: #405189;

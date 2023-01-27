@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import ProjectCard from "../ProjectCard.vue";
+import {BASE_URL} from '../../data/data.js';
 export default {
   name: "Projects",
   components: {
@@ -8,7 +9,7 @@ export default {
   },
   data() {
     return {
-      apiBaseUrl: "http://127.0.0.1:8000/api/projects",
+      BASE_URL,
       lastPage: null,
       projects: [],
       linkPages: [],
@@ -32,7 +33,7 @@ export default {
     },
   },
   mounted() {
-    this.getApi(this.apiBaseUrl);
+    this.getApi(this.BASE_URL + 'projects');
   },
 };
 </script>

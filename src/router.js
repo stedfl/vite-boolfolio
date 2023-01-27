@@ -35,7 +35,7 @@ const router = createRouter({
       component: Error404
     },
     {
-      path: '/progetti/dettaglio-post:slug',
+      path: '/progetti/dettaglio-progetto/:slug',
       name: 'postdetail',
       component: ProjectDetail
     }
