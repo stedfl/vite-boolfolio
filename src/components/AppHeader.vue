@@ -57,8 +57,19 @@ ul {
 }
 .link,
 .icon {
-  margin: 0 10px;
   color: #405189;
   font-weight: bold;
+}
+
+.link {
+  padding: 31px 20px;
+  &.active {
+    background-color: #405189;
+    color: white;
+  }
+}
+
+.icon {
+  margin: 10px;
 }
 </style>

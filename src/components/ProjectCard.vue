@@ -11,7 +11,9 @@ export default {
   <div class="card">
     <div class="inner-card">
       <div class="project-name">
-        <h2>{{ project.name }}</h2>
+        <router-link :to="{name: 'postdetail', params: {slug: project.slug}}">
+          <h2>{{ project.name }}</h2>
+        </router-link>
         <span>{{ project.type.name }}</span>
       </div>
       <p v-html="project.summary"></p>
@@ -53,6 +55,7 @@ export default {
       h2 {
         text-transform: capitalize;
         margin-bottom: 10px;
+        color: #405189;
       }
       span {
         background-color: lightblue;
