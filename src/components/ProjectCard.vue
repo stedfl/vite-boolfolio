@@ -1,9 +1,10 @@
 <script>
+
 export default {
   name: "ProjectCard",
   props: {
     project: Object,
-  },
+  }
 };
 </script>
 

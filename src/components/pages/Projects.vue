@@ -2,6 +2,7 @@
 import axios from "axios";
 import ProjectCard from "../ProjectCard.vue";
 import {BASE_URL} from '../../data/data.js';
+import { store } from '../../data/store.js'
 export default {
   name: "Projects",
   components: {
@@ -10,27 +11,45 @@ export default {
   data() {
     return {
       BASE_URL,
-      lastPage: null,
-      projects: [],
-      linkPages: [],
-      currentPage: null,
+      store,
     };
   },
   methods: {
     getApi(url) {
       axios.get(url).then((result) => {
-        this.projects = result.data.projects.data;
-        this.linkPages = result.data.projects.links;
+        this.store.projects = result.data.projects.data;
+        this.store.linkPages = result.data.projects.links;
         this.lastPage = result.data.projects.last_page;
+        store.pagination = true;
       });
     },
     getPage(numberPage) {
-      axios.get(this.linkPages[numberPage].url).then((result) => {
-        this.projects = result.data.projects.data;
-        this.linkPages = result.data.projects.links;
-        this.currentPage = result.data.projects.current_page;
+      axios.get(this.store.linkPages[numberPage].url).then((result) => {
+        this.store.projects = result.data.projects.data;
+        this.store.linkPages = result.data.projects.links;
+        this.store.currentPage = result.data.projects.current_page;
+        store.pagination = true;
       });
     },
+    getSearch() {
+      axios.get(this.BASE_URL + 'projects/search', {
+        params: {
+          search : store.search
+        }
+      })
+      .then((result) => {
+        this.store.projects = result.data.projects;
+        this.store.pagination = false;
+        this.store.search = '';
+      })
+    },
+    getAllOrSearch() {
+      if(this.store.search === '') {
+        this.getApi(this.BASE_URL + 'projects');
+      } else {
+        this.getSearch();
+      }
+    }
   },
   mounted() {
     this.getApi(this.BASE_URL + 'projects');
@@ -41,19 +60,25 @@ export default {
 <template>
   <main>
     <div class="container">
-      <h1 class="title">LISTA PROGETTI</h1>
+      <div class="title-search">
+        <h1 class="title">LISTA PROGETTI</h1>
+        <div class="search">
+          <input type="text" placeholder="Cerca progetto per titolo" v-model.trim="store.search" @keyup.enter="getAllOrSearch()">
+          <button @click="getAllOrSearch()">Cerca</button>
+        </div>
+      </div>
       <div class="cards-container">
         <ProjectCard
-          v-for="project in projects"
+          v-for="project in store.projects"
           :key="project.id"
           :project="project"
         />
       </div>
-      <div class="pagination">
+      <div v-if="store.pagination" class="pagination">
         <button @click="getPage(1)">
           <i class="fa-solid fa-backward-step"></i>
         </button>
-        <template v-for="page in linkPages" :key="page.label">
+        <template v-for="page in store.linkPages" :key="page.label">
           <button
             :class="{ clicked: page.active }"
             v-if="!isNaN(page.label)"
@@ -75,8 +100,19 @@ export default {
 
 main {
   background-color: $primary-bg-color;
+  overflow: auto;
   color: white;
   padding: 2rem 0;
+  .title-search {
+    display: flex;
+    align-items: center;
+    h1 {
+      margin-right: 3rem;
+    }
+    button {
+      margin-left: 0.5rem;
+    }
+  }
 }
 .cards-container {
   margin-top: 50px;
