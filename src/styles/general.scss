@@ -1,7 +1,7 @@
-@import 'node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-@import 'node_modules/@fontsource/montserrat/index.css';
-@import 'node_modules/@fontsource/montserrat/700.css';
-@import 'node_modules/@fontsource/montserrat/400.css';
+@import "node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "node_modules/@fontsource/montserrat/index.css";
+@import "node_modules/@fontsource/montserrat/700.css";
+@import "node_modules/@fontsource/montserrat/400.css";
 
 * {
   padding: 0;
@@ -31,4 +31,41 @@ a {
   overflow: auto;
   max-width: 1440px;
   margin: 0 auto;
+}
+
+.type {
+  background-color: #add8e6;
+  text-transform: capitalize;
+  color: black;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.type.backend {
+  background-color: #ffa837;
+  color: white;
+}
+
+.type.frontend {
+  background-color: #219ebc;
+  color: white;
+}
+
+.type.fullstack {
+  background-color: #f07167;
+  color: white;
+}
+
+.type.app {
+  background-color: #877bac;
+  color: white;
+}
+
+.tech-item {
+  color: white;
+  text-transform: capitalize;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid white;
 }

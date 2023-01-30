@@ -15,7 +15,7 @@ export default {
         <router-link :to="{name: 'postdetail', params: {slug: project.slug}}">
           <h2>{{ project.name }}</h2>
         </router-link>
-        <span v-if="project.type">{{ project.type.name }}</span>
+        <span :class="'type ' + project.type.slug" v-if="project.type">{{ project.type.name }}</span>
       </div>
       <p v-html="project.summary"></p>
       <div v-if="project.technologies.length" class="tech">
@@ -44,6 +44,8 @@ export default {
 
 .card {
   margin-bottom: 2rem;
+  margin-right: 3rem;
+  max-width: 380px;
   color: $primary-bg-color;
   width: calc(100% / 2);
 
@@ -61,11 +63,7 @@ export default {
         color: $primary-bg-color;
       }
       span {
-        background-color: lightblue;
-        font-weight: 700;
         margin-left: 15px;
-        padding: 5px 10px;
-        border-radius: 10px;
       }
     }
 

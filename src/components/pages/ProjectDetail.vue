@@ -30,7 +30,7 @@ export default {
       <div class="main-wrap">
         <div class="card">
           <img :src="project.cover_image" :alt="project.name" />
-          <span class="type" v-if="project.type">{{ project.type.name }}</span>
+          <span :class="'type detail ' + project.type.slug " v-if="project.type">{{ project.type.name }}</span>
           <div class="text">
             <h1>{{ project.name }}</h1>
             <div class="summary" v-html="project.summary"></div>
@@ -82,13 +82,12 @@ export default {
     margin: 1rem 0;
     text-shadow: 0 4px 0 #b9b9b9;
   }
-  .type{
+  .type.detail{
     position: absolute;
     top: -20px;
     right: -50px;
     font-weight: 900;
     padding: 10px 20px;
-    background-color: #70bdc2;
     border-radius: 20px;
     font-size: 1.5rem;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
@@ -108,13 +107,6 @@ export default {
     border-radius: 15px;
     margin: 0 20px;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-  }
-  .tech-item {
-    color: white;
-    text-transform: capitalize;
-    padding: 10px 15px;
-    border-radius: 30px;
-    border: 1px solid white;
   }
 }
 
