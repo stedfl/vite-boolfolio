@@ -11,9 +11,9 @@ export default {
     };
   },
   methods: {
-    getByType(id) {
+    getByTypeTech(string, id) {
       axios
-        .get(this.BASE_URL + "projects/projectsbytype/" + id)
+        .get(this.BASE_URL + "projects/projectsby" + string + id)
         .then((result) => {
           store.projects = result.data.projects;
           store.pagination = false;
@@ -31,7 +31,7 @@ export default {
         :class="'type ' + typeItem.slug"
         v-for="typeItem in store.typesList"
         :key="'type' + typeItem.id"
-        @click="getByType(typeItem.id)"
+        @click="getByTypeTech('type/', typeItem.id), store.isTitle=true, store.title=`- Tipo: ${typeItem.name}`"
       >
         {{ typeItem.name }}
       </span>
@@ -47,8 +47,14 @@ export default {
           class="logo"
           :src="technology.logo"
           :alt="technology.name"
+          @click="getByTypeTech('technology/', technology.id), store.isTitle=true, store.title=`- Tecnologia: ${technology.name}`"
         />
-        <span class="tech-item" v-else>{{ technology.name }}</span>
+        <span
+          class="tech-item"
+          v-else
+          @click="getByTypeTech('technology/', technology.id)"
+          >{{ technology.name }}</span
+        >
       </template>
     </div>
     <div class="all" @click="$emit('getApi', BASE_URL + 'projects')">

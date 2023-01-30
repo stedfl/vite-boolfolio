@@ -7,5 +7,7 @@ export const store = reactive({
   search: '',
   pagination: true,
   typesList: '',
-  technologiesList: ''
+  technologiesList: '',
+  isTitle: false,
+  title: ''
 })

@@ -76,6 +76,10 @@ export default {
       span {
         text-transform: capitalize;
         margin-left: 15px;
+        font-weight: 500;
+        border: 1px solid $primary-bg-color;
+        padding: 5px 10px;
+        border-radius: 15px;
       }
     }
     .thumb {

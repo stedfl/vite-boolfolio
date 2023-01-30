@@ -26,6 +26,7 @@ export default {
         this.store.technologiesList = result.data.technologies;
         this.store.typesList = result.data.types;
         store.pagination = true;
+        store.isTitle = false;
       });
     },
     getPage(numberPage) {
@@ -34,6 +35,7 @@ export default {
         this.store.linkPages = result.data.projects.links;
         this.store.currentPage = result.data.projects.current_page;
         store.pagination = true;
+        store.isTitle = false;
       });
     },
     getSearch() {
@@ -47,6 +49,7 @@ export default {
           this.store.projects = result.data.projects;
           this.store.pagination = false;
           this.store.search = "";
+          store.isTitle = false;
         });
     },
     getAllOrSearch() {
@@ -68,6 +71,9 @@ export default {
     <div class="container">
       <div class="title-search">
         <h1 class="title">LISTA PROGETTI</h1>
+        <div v-if="store.isTitle" class="title-selection">
+          <h2>{{ store.title }}</h2>
+        </div>
         <div class="search">
           <input
             type="text"
@@ -127,7 +133,11 @@ main {
     display: flex;
     align-items: center;
     h1 {
-      margin-right: 3rem;
+      margin-right: 1rem;
+    }
+    h2 {
+      text-transform: capitalize;
+      margin-right: 2rem;
     }
 
     input {
