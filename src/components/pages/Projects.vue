@@ -1,14 +1,14 @@
 <script>
 import axios from "axios";
 import ProjectCard from "../ProjectCard.vue";
-import AsideBar from '../AsideBar.vue';
+import AsideBar from "../AsideBar.vue";
 import { BASE_URL } from "../../data/data.js";
 import { store } from "../../data/store.js";
 export default {
   name: "Projects",
   components: {
     ProjectCard,
-    AsideBar
+    AsideBar,
   },
   data() {
     return {
@@ -19,12 +19,12 @@ export default {
   methods: {
     getApi(url) {
       axios.get(url).then((result) => {
+        console.log(url);
         this.store.projects = result.data.projects.data;
         this.store.linkPages = result.data.projects.links;
         this.lastPage = result.data.projects.last_page;
         this.store.technologiesList = result.data.technologies;
         this.store.typesList = result.data.types;
-        console.log(this.store.typesList);
         store.pagination = true;
       });
     },
@@ -80,13 +80,15 @@ export default {
       </div>
       <div class="row">
         <div class="col-left">
-          <div class="cards-container">
+
+          <div v-if="store.projects.length" class="cards-container">
             <ProjectCard
               v-for="project in store.projects"
               :key="project.id"
               :project="project"
             />
           </div>
+          <h4 class="no-results" v-else>Nessun risultato trovato</h4>
           <div v-if="store.pagination" class="pagination">
             <button @click="getPage(1)">
               <i class="fa-solid fa-backward-step"></i>
@@ -106,7 +108,7 @@ export default {
           </div>
         </div>
         <div class="col-right">
-          <AsideBar></AsideBar>
+          <AsideBar @getApi="getApi"></AsideBar>
         </div>
       </div>
     </div>
@@ -149,6 +151,10 @@ main {
     .col-left {
       width: 70%;
       min-height: 700px;
+      .no-results {
+        margin-top: 2rem;
+        font-style: italic;
+      }
     }
     .col-right {
       width: 30%;
