@@ -71,9 +71,10 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use '../../styles/partials/variables' as *;
 
 main {
-  background-color: #405189;
+  background-color: $primary-bg-color;
   color: white;
   padding: 2rem 0;
 }
@@ -90,10 +91,10 @@ main {
     border: 0;
     margin-left: 5px;
     border-radius: 5px;
-    color: #405189;
+    color:$primary-bg-color;
     font-weight: 600;
     &.clicked {
-      background-color: #add8e6;
+      background-color: $secondary-bg-color;
     }
   }
 }

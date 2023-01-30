@@ -1,4 +1,7 @@
 @import 'node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import 'node_modules/@fontsource/montserrat/index.css';
+@import 'node_modules/@fontsource/montserrat/700.css';
+@import 'node_modules/@fontsource/montserrat/400.css';
 
 * {
   padding: 0;
@@ -8,8 +11,7 @@
 
 body {
   background-color: #cde7fc;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 main {

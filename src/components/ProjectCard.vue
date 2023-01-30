@@ -39,9 +39,11 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use '../styles/partials/variables' as *;
+
 .card {
   margin-bottom: 2rem;
-  color: #405189;
+  color: $primary-bg-color;
   width: calc(100% / 2);
 
   .inner-card {
@@ -55,7 +57,7 @@ export default {
       h2 {
         text-transform: capitalize;
         margin-bottom: 10px;
-        color: #405189;
+        color: $primary-bg-color;
       }
       span {
         background-color: lightblue;

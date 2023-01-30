@@ -40,6 +40,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use '../styles/partials/variables' as *;
+
 header {
   height: 80px;
 }
@@ -58,14 +60,14 @@ ul {
 
 .link,
 .icon {
-  color: #405189;
+  color: $secondary-logo-color;
   font-weight: bold;
 }
 
 .link {
-  padding: 31px 20px;
+  padding: 29px 20px;
   &.active {
-    background-color: #537bff;
+    background-color: $primary-logo-color;
     color: white;
     border-radius: 10px;
   }
