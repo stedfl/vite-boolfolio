@@ -5,7 +5,6 @@ export const store = reactive({
   linkPages: [],
   currentPage: null,
   search: '',
-  pagination: true,
   typesList: '',
   technologiesList: '',
   isTitle: false,

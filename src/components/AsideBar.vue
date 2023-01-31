@@ -13,10 +13,11 @@ export default {
   methods: {
     getByTypeTech(string, id) {
       axios
-        .get(this.BASE_URL + "projects/projectsby" + string + id)
+        .get(BASE_URL + "projects/projectsby" + string + id)
         .then((result) => {
-          store.projects = result.data.projects;
-          store.pagination = false;
+          store.projects = result.data.projects.data;
+          store.linkPages = result.data.projects.links;
+          store.lastPage = result.data.projects.last_page;
         });
     },
   },

@@ -19,23 +19,22 @@ export default {
   methods: {
     getApi(url) {
       axios.get(url).then((result) => {
-        console.log(url);
-        this.store.projects = result.data.projects.data;
-        this.store.linkPages = result.data.projects.links;
-        this.lastPage = result.data.projects.last_page;
-        this.store.technologiesList = result.data.technologies;
-        this.store.typesList = result.data.types;
-        store.pagination = true;
+        store.projects = result.data.projects.data;
+        store.linkPages = result.data.projects.links;
+        store.lastPage = result.data.projects.last_page;
+        store.currentPage = result.data.projects.current_page;
+        store.technologiesList = result.data.technologies;
+        store.typesList = result.data.types;
         store.isTitle = false;
+        console.log(result.data.projects);
       });
     },
     getPage(numberPage) {
       axios.get(this.store.linkPages[numberPage].url).then((result) => {
-        this.store.projects = result.data.projects.data;
-        this.store.linkPages = result.data.projects.links;
-        this.store.currentPage = result.data.projects.current_page;
-        store.pagination = true;
-        store.isTitle = false;
+        store.projects = result.data.projects.data;
+        store.linkPages = result.data.projects.links;
+        store.currentPage = result.data.projects.current_page;
+        store.isTitle = false
       });
     },
     getSearch() {
@@ -46,15 +45,15 @@ export default {
           },
         })
         .then((result) => {
-          this.store.projects = result.data.projects;
-          this.store.pagination = false;
-          this.store.search = "";
+          store.projects = result.data.projects.data;
+          store.linkPages = result.data.projects.links;
+          store.lastPage = result.data.projects.last_page;
           store.isTitle = false;
         });
     },
     getAllOrSearch() {
       if (this.store.search === "") {
-        this.getApi(this.BASE_URL + "projects");
+        this.getApi(BASE_URL + "projects");
       } else {
         this.getSearch();
       }
@@ -86,18 +85,23 @@ export default {
       </div>
       <div class="row">
         <div class="col-left">
-
-          <div v-if="store.projects.length" class="cards-container">
-            <ProjectCard
-              v-for="project in store.projects"
-              :key="project.id"
-              :project="project"
-            />
+          <div class="projects">
+            <div v-if="store.projects.length" class="cards-container">
+              <ProjectCard
+                v-for="project in store.projects"
+                :key="project.id"
+                :project="project"
+              />
+            </div>
+            <h4 class="no-results" v-else>Nessun risultato trovato</h4>
           </div>
-          <h4 class="no-results" v-else>Nessun risultato trovato</h4>
-          <div v-if="store.pagination" class="pagination">
+
+          <div v-if="store.projects.length && store.lastPage > 1" class="pagination">
             <button @click="getPage(1)">
               <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button @click="getPage(store.currentPage === 1 ? 1 : store.currentPage  - 1)">
+              <i class="fa-solid fa-backward"></i>
             </button>
             <template v-for="page in store.linkPages" :key="page.label">
               <button
@@ -108,7 +112,10 @@ export default {
                 {{ page.label }}
               </button>
             </template>
-            <button @click="getPage(lastPage)">
+            <button @click="getPage(store.currentPage === store.lastPage ? store.lastPage : store.currentPage +1)">
+              <i class="fa-solid fa-forward"></i>
+            </button>
+            <button @click="getPage(store.lastPage)">
               <i class="fa-solid fa-forward-step"></i>
             </button>
           </div>
@@ -160,7 +167,9 @@ main {
     display: flex;
     .col-left {
       width: 70%;
-      min-height: 700px;
+      .projects {
+        min-height: 500px;
+      }
       .no-results {
         margin-top: 2rem;
         font-style: italic;
@@ -178,7 +187,7 @@ main {
   flex-wrap: wrap;
 }
 .pagination {
-  margin-top: 5rem;
+  margin-top: 1rem;
   button {
     padding: 10px 15px;
     background-color: white;
